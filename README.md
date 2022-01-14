@@ -84,8 +84,7 @@ class MyCustomFormState의 extends State<MyCustomFormState> {
   }
 }
 ```
-
-## 5. 이메일 인증 처리
-
 예제 코드 출처:
 [독행소년 티스토리](https://here4you.tistory.com/126)
+
+## 5. 이메일 인증 처리

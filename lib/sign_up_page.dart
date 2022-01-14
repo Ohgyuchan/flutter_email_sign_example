@@ -123,7 +123,7 @@ class SignUpPage extends StatelessWidget {
 
               if (user != null) {
                 Get.offAllNamed(
-                  '/login',
+                  '/login/signup/verify',
                   arguments: _signUpEmailController.text,
                 );
                 signUpController.notRegistering();

@@ -15,6 +15,7 @@ class Authentication {
       User? user = result.user;
 
       if (user != null) {
+        user.sendEmailVerification();
         FirebaseFirestore.instance.collection('users').doc(user.uid).set({
           "uid": user.uid,
           "displayName": nickName,
@@ -52,10 +53,10 @@ class Authentication {
 
       User? user = result.user;
 
-      // if (user != null && !user.emailVerified) {
-      //   user.sendEmailVerification();
-      //   await FirebaseAuth.instance.signOut();
-      // }
+      if (user != null && !user.emailVerified) {
+        user.sendEmailVerification();
+        await FirebaseAuth.instance.signOut();
+      }
 
       return user;
     } on PlatformException catch (e) {

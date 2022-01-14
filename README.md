@@ -1,16 +1,21 @@
-# email
+# Flutter Firebase Email & Password Login
 
-A new Flutter project.
+## UI 생성
 
-## Getting Started
+## Firebase 연결
+[Android]
+google-service.json 다운로드
+<img src='assets/1.png'>
 
-This project is a starting point for a Flutter application.
+Firebase 초기화
+```dart
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized(); // Flutter 비동기 실행을 위한 코드
+  await Firebase.initializeApp(); // Firebase 초기화
+  runApp(const MyApp());
+}
+```
 
-A few resources to get you started if this is your first Flutter project:
+## Authentication 작업
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 각종 예외 처리ㅣ

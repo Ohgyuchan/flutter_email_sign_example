@@ -4,10 +4,11 @@
 > 설치 방법  
 > `pubspec.yaml` 에 copy & paste 후 `flutter pub get` 명령어 실행
 > ```yaml
-> get: ^4.6.1
-> firebase_auth: ^3.3.5
-> cloud_firestore: ^3.1.6
-> firebase_core: ^1.11.0
+> dependencies:
+>   get: ^4.6.1
+>   firebase_auth: ^3.3.5
+>   cloud_firestore: ^3.1.6
+>   firebase_core: ^1.11.0
 > ```
 > `terminal` 에 아래 명령어 입력
 > ```shell

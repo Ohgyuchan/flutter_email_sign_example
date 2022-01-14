@@ -1,10 +1,10 @@
-import 'package:email/sign_up_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
 import 'authentication.dart';
-import 'home_page.dart';
+
+enum Option { USER, ADMIN }
 
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -44,7 +44,38 @@ class LoginPage extends StatelessWidget {
             Column(
               children: [
                 SizedBox(
-                  height: 70,
+                  height: 30,
+                ),
+                Obx(
+                  () => Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Row(
+                        children: [
+                          Radio(
+                            value: Option.USER,
+                            groupValue: loginController.option.value,
+                            onChanged: (value) {
+                              loginController.option.value = value as Option;
+                            },
+                          ),
+                          Text('사용자'),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Radio(
+                            value: Option.ADMIN,
+                            groupValue: loginController.option.value,
+                            onChanged: (value) {
+                              loginController.option.value = value as Option;
+                            },
+                          ),
+                          Text('관리자'),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
                 emailField(),
                 SizedBox(
@@ -111,7 +142,10 @@ class LoginPage extends StatelessWidget {
       User? user = await Authentication.signInWithEmailAndPassword(
           _signInEmailController.text, _signInPasswordController.text);
       if (user != null) {
-        Get.offNamed('/login/home');
+        if (loginController.option.value == Option.USER)
+          Get.offNamed('/login/home');
+        else
+          Get.offNamed('/login/admin');
         // if (user.emailVerified) {
         //   Get.offNamed('/login/home');
         // } else {
@@ -188,6 +222,7 @@ class LoginPage extends StatelessWidget {
 class LoginController extends GetxController {
   var visibility = false.obs;
   var isLoging = false.obs;
+  var option = Option.USER.obs;
 
   visible() {
     visibility.value ? visibility.value = false : visibility.value = true;

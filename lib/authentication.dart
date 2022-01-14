@@ -6,7 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Authentication {
   static Future<User?> signUpWithEmailAndPassword(
-      String email, String password, String nickName) async {
+      String email, String password, String nickName, type) async {
     FirebaseAuth auth = FirebaseAuth.instance;
     try {
       UserCredential result = await auth.createUserWithEmailAndPassword(
@@ -19,6 +19,7 @@ class Authentication {
           "uid": user.uid,
           "displayName": nickName,
           "email": email,
+          "type": type,
         });
         return user;
       }
@@ -72,7 +73,7 @@ class Authentication {
           case '[firebase_auth/wrong-password] The password is invalid or the user does not have a password.':
             Get.snackbar(
               "패스워드가 틀렸습니다.",
-              "패스워드를 확인 해주세요.🙁\n구글 혹은 페이스북 계정으로 로그인한 경우 일 수 있습니다.",
+              "패스워드를 확인 해주세요.🙁c",
             );
             break;
           case '[firebase_auth/network-request-failed] A network error (such as timeout, interrupted connection or unreachable host) has occurred.':

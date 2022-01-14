@@ -1,3 +1,4 @@
+import 'package:email/admin_page.dart';
 import 'package:email/email_verity.dart';
 import 'package:email/home_page.dart';
 import 'package:email/login_page.dart';
@@ -35,6 +36,10 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: '/login/home',
           page: () => HomePage(),
+        ),
+        GetPage(
+          name: '/login/admin',
+          page: () => AdminPage(),
         ),
       ],
     );

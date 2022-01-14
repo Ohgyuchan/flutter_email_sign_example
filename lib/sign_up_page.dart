@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 
 import 'authentication.dart';
 
+enum Option { USER, ADMIN }
+
 class SignUpPage extends StatelessWidget {
   SignUpPage({Key? key}) : super(key: key);
 
@@ -50,6 +52,37 @@ class SignUpPage extends StatelessWidget {
             SizedBox(
               height: 70,
             ),
+            Obx(
+              () => Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Row(
+                    children: [
+                      Radio(
+                        value: Option.USER,
+                        groupValue: signUpController.option.value,
+                        onChanged: (value) {
+                          signUpController.option.value = value as Option;
+                        },
+                      ),
+                      Text('사용자'),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Radio(
+                        value: Option.ADMIN,
+                        groupValue: signUpController.option.value,
+                        onChanged: (value) {
+                          signUpController.option.value = value as Option;
+                        },
+                      ),
+                      Text('관리자'),
+                    ],
+                  ),
+                ],
+              ),
+            ),
             emailField(),
             SizedBox(
               height: 10,
@@ -86,6 +119,7 @@ class SignUpPage extends StatelessWidget {
                 _signUpEmailController.text,
                 _signUpPasswordController.text,
                 _signUpNickNameController.text,
+                signUpController.option.value,
               );
 
               if (user != null) {
@@ -240,6 +274,7 @@ class SignUpController extends GetxController {
   var visibility = false.obs;
   var visibilityCheck = false.obs;
   var isRegistering = false.obs;
+  var option = Option.USER.obs;
 
   visible() {
     visibility.value ? visibility.value = false : visibility.value = true;

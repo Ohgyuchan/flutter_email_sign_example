@@ -1,4 +1,3 @@
-import 'package:email/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
@@ -119,7 +118,7 @@ class SignUpPage extends StatelessWidget {
                 _signUpEmailController.text,
                 _signUpPasswordController.text,
                 _signUpNickNameController.text,
-                signUpController.option.value,
+                signUpController.option.value.toString(),
               );
 
               if (user != null) {

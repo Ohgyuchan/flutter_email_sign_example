@@ -6,7 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Authentication {
   static Future<User?> signUpWithEmailAndPassword(
-      String email, String password, String nickName, type) async {
+      String email, String password, String nickName, String userType) async {
     FirebaseAuth auth = FirebaseAuth.instance;
     try {
       UserCredential result = await auth.createUserWithEmailAndPassword(
@@ -19,7 +19,7 @@ class Authentication {
           "uid": user.uid,
           "displayName": nickName,
           "email": email,
-          "type": type,
+          "userType": userType,
         });
         return user;
       }

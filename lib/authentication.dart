@@ -15,7 +15,6 @@ class Authentication {
       User? user = result.user;
 
       if (user != null) {
-        user.sendEmailVerification();
         FirebaseFirestore.instance.collection('users').doc(user.uid).set({
           "uid": user.uid,
           "displayName": nickName,
@@ -26,6 +25,18 @@ class Authentication {
 
       return user;
     } catch (e) {
+      if (e.toString() ==
+          '[firebase_auth/weak-password] Password should be at least 6 characters') {
+        Get.snackbar(
+          "비밀번호가 너무 짧습니다.",
+          "6자 이상으로 설정해주세요.🙁",
+        );
+      } else {
+        Get.snackbar(
+          "중복 이메일",
+          "이미 사용중인 이메일입니다.🙁",
+        );
+      }
       print('sign up failed');
     }
   }
@@ -40,10 +51,10 @@ class Authentication {
 
       User? user = result.user;
 
-      if (user != null && !user.emailVerified) {
-        user.sendEmailVerification();
-        await FirebaseAuth.instance.signOut();
-      }
+      // if (user != null && !user.emailVerified) {
+      //   user.sendEmailVerification();
+      //   await FirebaseAuth.instance.signOut();
+      // }
 
       return user;
     } on PlatformException catch (e) {

@@ -8,7 +8,7 @@ import 'home_page.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
-  final _email = Get.arguments;
+  final email = Get.arguments;
   final _signInFormKey = GlobalKey<FormState>();
 
   final TextEditingController _signInEmailController = TextEditingController();
@@ -18,16 +18,23 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('로그인'),
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('로그인'),
+        ),
+        body: _bodyWidget(),
       ),
-      body: _bodyWidget(),
     );
   }
 
   _bodyWidget() {
-    if (_email != null) _signInEmailController.text = _email;
+    if (email != null) {
+      _signInEmailController.text = email;
+    }
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16),
       child: Form(
@@ -59,7 +66,7 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                   onTap: () {
-                    Get.to(SignUpPage());
+                    Get.toNamed('/login/signup');
                   },
                 ),
               ],
@@ -104,16 +111,17 @@ class LoginPage extends StatelessWidget {
       User? user = await Authentication.signInWithEmailAndPassword(
           _signInEmailController.text, _signInPasswordController.text);
       if (user != null) {
-        if (user.emailVerified) {
-          Get.to(HomePage());
-        } else {
-          Get.snackbar(
-            "이메일 인증 미확인",
-            "인증 메일을 보냈습니다. 해당 이메일을 확인하세요.🙁",
-          );
-          await FirebaseAuth.instance.signOut();
-          loginController.notLoging();
-        }
+        Get.offNamed('/login/home');
+        // if (user.emailVerified) {
+        //   Get.offNamed('/login/home');
+        // } else {
+        //   Get.snackbar(
+        //     "이메일 인증 미확인",
+        //     "인증 메일을 보냈습니다. 해당 이메일을 확인하세요.🙁",
+        //   );
+        //   await FirebaseAuth.instance.signOut();
+        //   loginController.notLoging();
+        // }
       } else {
         loginController.notLoging();
       }

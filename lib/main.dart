@@ -1,4 +1,7 @@
+import 'package:email/email_verity.dart';
+import 'package:email/home_page.dart';
 import 'package:email/login_page.dart';
+import 'package:email/sign_up_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,7 +18,25 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      home: LoginPage(),
+      initialRoute: '/login',
+      getPages: [
+        GetPage(
+          name: '/login',
+          page: () => LoginPage(),
+        ),
+        GetPage(
+          name: '/login/signup',
+          page: () => SignUpPage(),
+        ),
+        GetPage(
+          name: '/login/signup/verify',
+          page: () => EmailVerfyPage(),
+        ),
+        GetPage(
+          name: '/login/home',
+          page: () => HomePage(),
+        ),
+      ],
     );
   }
 }

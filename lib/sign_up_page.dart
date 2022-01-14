@@ -1,5 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:email/email_verity.dart';
+import 'package:email/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +31,7 @@ class SignUpPage extends StatelessWidget {
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text(
-            '계정 생성',
+            '회원가입',
           ),
         ),
         body: _bodyWidget(),
@@ -68,9 +67,6 @@ class SignUpPage extends StatelessWidget {
               height: 48,
             ),
             _signUpButton(),
-            SizedBox(
-              height: 15,
-            ),
           ],
         ),
       ),
@@ -93,17 +89,13 @@ class SignUpPage extends StatelessWidget {
               );
 
               if (user != null) {
-                Get.to(
-                  EmailVerfyPage(),
+                Get.offAllNamed(
+                  '/login',
                   arguments: _signUpEmailController.text,
                 );
                 signUpController.notRegistering();
               } else {
                 signUpController.notRegistering();
-                Get.snackbar(
-                  "중복 이메일",
-                  "이미 사용중인 이메일입니다.🙁",
-                );
               }
             } else {
               Get.snackbar(
@@ -124,7 +116,7 @@ class SignUpPage extends StatelessWidget {
                   color: Colors.white,
                 )
               : Text(
-                  '인증 메일 받기',
+                  '회원가입 완료하기',
                 ),
         ),
       ),

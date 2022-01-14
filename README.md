@@ -20,7 +20,7 @@
 
 ## 2. Firebase 연결
 [Android]
-google-service.json 다운로드
+google-service.json 다운로드  
 <img src='assets/1.png'>
 
 Firebase 초기화

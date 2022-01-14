@@ -18,4 +18,4 @@ Future<void> main() async {
 
 ## Authentication 작업
 
-## 각종 예외 처리ㅣ
+## 각종 예외 처리
